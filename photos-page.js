@@ -1,10 +1,10 @@
-PhotosPage = function PhotosPage(helper) {
+function PhotosPage(helper) {
     this.helper = helper;
     this.uploadButton = By.linkText("Upload");
     this.selectFilesButton = By.className("file-upload-btn");
     this.inputFileField = By.cssSelector('input[type=file]:not([directory])');
     this.failureMessage = By.className("failed-sofar");
-};
+}
 
 PhotosPage.prototype.goToUpload = function() {
     this.helper.waitAndClick(this.uploadButton, 5000);
@@ -21,5 +21,3 @@ PhotosPage.prototype.uploadPhoto = function(fileName) {
 PhotosPage.prototype.waitForFailure = function() {
     this.helper.waitForElement(this.failureMessage, 15000);
 };
-
-module.exports = PhotosPage;

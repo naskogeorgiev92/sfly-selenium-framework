@@ -1,18 +1,7 @@
-Helper = function Helper(driver) {
+function Helper(driver) {
     this.driver = driver;
     this.action = new Actions(this.driver);
-};
-
-// var isElementPresent = function(by) {
-//     try {
-//         test.log("Explicit wait for: " + by);
-//         this.driver.findElement(by);
-//         test.log("Found: " + by);
-//         return true;
-//     } catch (e) {
-//         return false;
-//     }
-// };
+}
 
 var isCurrentlyVisible = function(by) {
         var elements = driver.findElements(by);
@@ -33,7 +22,7 @@ var isCurrentlyVisible = function(by) {
 
 var explicitWait = function(by, timeOut) {
     test.waitFor(function() {  
-        test.log("Upper Explicit wait for: " + by);      
+        test.log("Explicit wait for: " + by);      
         return isCurrentlyVisible(by);
     }, timeOut);
 };
@@ -69,5 +58,3 @@ Helper.prototype.waitAndClick = function(by, timeOut) {
 Helper.prototype.executeScript = function(script) {
     this.driver.executeScript(script);
 };
-
-module.exports = Helper;

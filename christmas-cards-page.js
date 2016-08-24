@@ -1,4 +1,4 @@
-ChristmasCardsPage = function ChristmasCardsPage(helper) {
+function ChristmasCardsPage(helper) {
   this.helper = helper;
   this.closeDialogButton = By.xpath("//img[@class='x-button']");
   this.firstCard = By.id("0");
@@ -14,10 +14,10 @@ ChristmasCardsPage = function ChristmasCardsPage(helper) {
   this.firstPhoto = By.xpath("//ol/li[2]");
   this.doneButton = By.xpath(("//a[@tabindex='101']"));
   this.uploadedImage = By.id(("picturestripItem-0"));
-};
+}
 
 ChristmasCardsPage.prototype.closePreviewDialog = function() {
-  this.helper.clickElement(this.closeDialogButton);
+  this.helper.waitAndClick(this.closeDialogButton, 5000);
 };
 
 ChristmasCardsPage.prototype.personalizeCard = function() {
@@ -28,7 +28,7 @@ ChristmasCardsPage.prototype.personalizeCard = function() {
 };
 
 ChristmasCardsPage.prototype.uploadPhotoAnonymous = function() {
-  this.helper.clickElement(this.uploadButton);
+  this.helper.waitAndClick(this.uploadButton, 5000);
   this.helper.waitForElement(this.selectPhotosButton, 2000);
 };
 
@@ -45,5 +45,3 @@ ChristmasCardsPage.prototype.uploadTimelinePhotoSigned = function() {
   this.helper.waitAndClick(this.doneButton, 2000);
   this.helper.waitForElement(this.uploadedImage, 5000);
 };
-
-module.exports = ChristmasCardsPage;
