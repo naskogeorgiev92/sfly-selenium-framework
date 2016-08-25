@@ -1,19 +1,18 @@
 function ChristmasCardsPage(helper) {
-    this.closeDialogButton = By.xpath("//img[@class='x-button']");
+    this.closeDialogButton = By.className('x-button');
     this.firstCard = By.id("0");
     this.personalizeButton = By.id("Cta_1155367");
     this.skipSuggestionButton = By.id("personalizeFormModalButton0");
     this.getPhotosButton = By.id("getPicturesBtnLarge");
-    this.uploadButton = By.xpath("//a[contains(.,'Upload')]");
-    this.myComputerButton = By.xpath("//li[contains(.,'My Computer')]");
-    this.selectPhotosButton = By.xpath("//a[contains(.,'Select photos from your computer')]");
-    this.shutterflyPhotosButton = By.xpath("//li[contains(.,'Shutterfly Photos')]");
-    this.timelineButton = By.xpath("//li[contains(.,'Timeline')]");
+    this.uploadButton = By.linkText('Upload');
+    this.myComputerButton = By.className('shrUPMC');
+    this.selectPhotosButton = By.linkText('Select photos from your computer');
+    this.shutterflyPhotosButton = By.className('shrUPSFLY');
+    this.timelineButton = By.className('shrTLTimelineFolder');
     this.timelinePhotos = By.className("shrUPAlbum");
-    this.firstPhoto = By.xpath("//ol/li[2]");
-    this.doneButton = By.xpath(("//a[@tabindex='101']"));
+    this.firstPhoto = [By.className('shrUPG'), By.tagName('img')];
+    this.doneButton = [By.className('shrUPNB'), By.linkText('Done')];
     this.uploadedImage = By.id(("picturestripItem-0"));
-
 
     this.closePreviewDialog = function() {
         helper.clickElement(this.closeDialogButton, 5000);
@@ -40,8 +39,8 @@ function ChristmasCardsPage(helper) {
         helper.clickElement(this.shutterflyPhotosButton, 5000);
         helper.clickElement(this.timelineButton, 2000);
         helper.clickElement(this.timelinePhotos, 2000);
-        helper.clickElement(this.firstPhoto, 2000);
-        helper.clickElement(this.doneButton, 2000);
+        helper.clickDeepElement(this.firstPhoto, 5000);
+        helper.clickDeepElement(this.doneButton, 2000);
         helper.waitForElement(this.uploadedImage, 5000);
     };
 }

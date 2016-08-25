@@ -19,6 +19,9 @@ function Helper(driver) {
     };
 
     var explicitWait = function(by, timeOut) {
+        if (timeOut == null) {
+            timeOut = 1000;
+        }
         test.waitFor(function() {
             log("Explicit wait for: " + by);
             return isCurrentlyVisible(by);
@@ -30,19 +33,11 @@ function Helper(driver) {
     };
 
     this.hover = function(by, timeOut) {
-        if (timeOut == null) {
-            timeOut = 1000;
-            log("Hovering without timeout.");
-        }
         explicitWait(by, timeOut);
         this.action.moveToElement(driver.findElement(by)).build().perform();
     };
 
     this.writeText = function(by, text, timeOut) {
-        if (timeOut == null) {
-            timeOut = 1000;
-            log("Writing text without timeout.");
-        }
         explicitWait(by, timeOut);
         var element = driver.findElement(by);
         element.clear();
@@ -54,15 +49,20 @@ function Helper(driver) {
     };
 
     this.clickElement = function(by, timeOut) {
-        if (timeOut == null) {
-            timeOut = 1000;
-            log("Clicking on element without timeout.");
-        }
         explicitWait(by, timeOut);
         driver.findElement(by).click();
     };
 
     this.executeScript = function(script) {
         driver.executeScript(script);
+    };
+
+    this.clickDeepElement = function(bys, timeOut) {
+        var element = driver.findElement(By.tagName('body'));
+        explicitWait(bys[0], timeOut);
+        for (var i = 0; i < bys.length; i++) {
+            element = element.findElement(bys[i]);
+        }
+        element.click();
     };
 }
