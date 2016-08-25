@@ -6,12 +6,11 @@ var HomePage = function(helper) {
 
 
     this.goToChristmasCards = function() {
-        this.helper.waitForElement(this.cardsLink, 10000);
-        this.helper.hover(this.cardsLink);
+        this.helper.hover(this.cardsLink, 10000);
         this.helper.clickElement(this.christmasCardsLink);
     };
 
     this.goToMyPhotos = function() {
-        this.helper.waitAndClick(this.myPhotosLink, 10000);
+        this.helper.clickElement(this.myPhotosLink, 10000);
     };
 }

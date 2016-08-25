@@ -17,32 +17,32 @@ var ChristmasCardsPage = function(helper) {
 
 
     this.closePreviewDialog = function() {
-        this.helper.waitAndClick(this.closeDialogButton, 5000);
+        this.helper.clickElement(this.closeDialogButton, 5000);
     };
 
     this.personalizeCard = function() {
         this.helper.hover(this.firstCard);
         this.helper.clickElement(this.personalizeButton);
-        this.helper.waitAndClick(this.skipSuggestionButton, 10000);
+        this.helper.clickElement(this.skipSuggestionButton, 10000);
         this.helper.clickElement(this.getPhotosButton);
     };
 
     this.uploadPhotoAnonymous = function() {
-        this.helper.waitAndClick(this.uploadButton, 5000);
+        this.helper.clickElement(this.uploadButton, 5000);
         this.helper.waitForElement(this.selectPhotosButton, 2000);
     };
 
     this.uploadPhotoSigned = function() {
-        this.helper.waitAndClick(this.myComputerButton, 10000);
+        this.helper.clickElement(this.myComputerButton, 10000);
         this.helper.waitForElement(this.selectPhotosButton, 2000);
     };
 
     this.uploadTimelinePhotoSigned = function() {
-        this.helper.waitAndClick(this.shutterflyPhotosButton, 5000);
-        this.helper.waitAndClick(this.timelineButton, 2000);
-        this.helper.waitAndClick(this.timelinePhotos, 2000);
-        this.helper.waitAndClick(this.firstPhoto, 2000);
-        this.helper.waitAndClick(this.doneButton, 2000);
+        this.helper.clickElement(this.shutterflyPhotosButton, 5000);
+        this.helper.clickElement(this.timelineButton, 2000);
+        this.helper.clickElement(this.timelinePhotos, 2000);
+        this.helper.clickElement(this.firstPhoto, 2000);
+        this.helper.clickElement(this.doneButton, 2000);
         this.helper.waitForElement(this.uploadedImage, 5000);
     };
 }

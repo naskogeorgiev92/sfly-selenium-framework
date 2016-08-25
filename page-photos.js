@@ -7,14 +7,13 @@ var PhotosPage = function(helper) {
 
 
     this.goToUpload = function() {
-        this.helper.waitAndClick(this.uploadButton, 5000);
+        this.helper.clickElement(this.uploadButton, 5000);
         this.helper.waitForElement(this.selectFilesButton, 5000);
     };
 
     this.uploadPhoto = function(fileName) {
         this.helper.executeScript('$("input[type=file]:not([directory])")[0].style="";');
-        this.helper.waitForElement(this.inputFileField, 5000);
-        this.helper.writeText(this.inputFileField, filePath(fileName));
+        this.helper.writeText(this.inputFileField, filePath(fileName), 5000);
         this.helper.executeScript("var e = $.Event('drop'); e.originalEvent = {dataTransfer : { files : $('input[type=file]:not([directory])').get(0).files } }; $('.dropzone-content').trigger(e);");
     };
 

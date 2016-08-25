@@ -31,11 +31,21 @@ var Helper = function(driver) {
         explicitWait(by, timeOut);
     };
 
-    this.hover = function(by) {
+    this.hover = function(by, timeOut) {
+        if (timeOut == null) {
+            timeOut = 1000;
+            log("Hovering without timeout.");
+        }
+        explicitWait(by, timeOut);
         this.action.moveToElement(this.driver.findElement(by)).build().perform();
     };
 
-    this.writeText = function(by, text) {
+    this.writeText = function(by, text, timeOut) {
+        if (timeOut == null) {
+            timeOut = 1000;
+            log("Writing text without timeout.");
+        }
+        explicitWait(by, timeOut);
         var element = this.driver.findElement(by);
         element.clear();
         element.sendKeys(text);
@@ -45,11 +55,11 @@ var Helper = function(driver) {
         this.driver.get(url);
     };
 
-    this.clickElement = function(by) {
-        this.driver.findElement(by).click();
-    };
-
-    this.waitAndClick = function(by, timeOut) {
+    this.clickElement = function(by, timeOut) {
+        if (timeOut == null) {
+            timeOut = 1000;
+            log("Clicking on element without timeout.");
+        }
         explicitWait(by, timeOut);
         this.driver.findElement(by).click();
     };
