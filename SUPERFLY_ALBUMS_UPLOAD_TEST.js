@@ -1,6 +1,7 @@
 function
 import (file) {
-    return file.readContents() + ""; };
+    return file.readContents() + "";
+};
 
 eval(
     import (datafile('Sfly_Prod_Properties.js')));

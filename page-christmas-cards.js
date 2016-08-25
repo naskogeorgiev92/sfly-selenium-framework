@@ -1,5 +1,4 @@
-var ChristmasCardsPage = function(helper) {
-    this.helper = helper;
+function ChristmasCardsPage(helper) {
     this.closeDialogButton = By.xpath("//img[@class='x-button']");
     this.firstCard = By.id("0");
     this.personalizeButton = By.id("Cta_1155367");
@@ -17,32 +16,32 @@ var ChristmasCardsPage = function(helper) {
 
 
     this.closePreviewDialog = function() {
-        this.helper.clickElement(this.closeDialogButton, 5000);
+        helper.clickElement(this.closeDialogButton, 5000);
     };
 
     this.personalizeCard = function() {
-        this.helper.hover(this.firstCard);
-        this.helper.clickElement(this.personalizeButton);
-        this.helper.clickElement(this.skipSuggestionButton, 10000);
-        this.helper.clickElement(this.getPhotosButton);
+        helper.hover(this.firstCard);
+        helper.clickElement(this.personalizeButton);
+        helper.clickElement(this.skipSuggestionButton, 10000);
+        helper.clickElement(this.getPhotosButton);
     };
 
     this.uploadPhotoAnonymous = function() {
-        this.helper.clickElement(this.uploadButton, 5000);
-        this.helper.waitForElement(this.selectPhotosButton, 2000);
+        helper.clickElement(this.uploadButton, 5000);
+        helper.waitForElement(this.selectPhotosButton, 2000);
     };
 
     this.uploadPhotoSigned = function() {
-        this.helper.clickElement(this.myComputerButton, 10000);
-        this.helper.waitForElement(this.selectPhotosButton, 2000);
+        helper.clickElement(this.myComputerButton, 10000);
+        helper.waitForElement(this.selectPhotosButton, 2000);
     };
 
     this.uploadTimelinePhotoSigned = function() {
-        this.helper.clickElement(this.shutterflyPhotosButton, 5000);
-        this.helper.clickElement(this.timelineButton, 2000);
-        this.helper.clickElement(this.timelinePhotos, 2000);
-        this.helper.clickElement(this.firstPhoto, 2000);
-        this.helper.clickElement(this.doneButton, 2000);
-        this.helper.waitForElement(this.uploadedImage, 5000);
+        helper.clickElement(this.shutterflyPhotosButton, 5000);
+        helper.clickElement(this.timelineButton, 2000);
+        helper.clickElement(this.timelinePhotos, 2000);
+        helper.clickElement(this.firstPhoto, 2000);
+        helper.clickElement(this.doneButton, 2000);
+        helper.waitForElement(this.uploadedImage, 5000);
     };
 }

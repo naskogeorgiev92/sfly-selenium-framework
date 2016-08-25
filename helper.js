@@ -1,7 +1,5 @@
-var Helper = function(driver) {
-    this.driver = driver;
-    this.action = new Actions(this.driver);
-
+function Helper(driver) {
+    this.action = new Actions(driver);
 
     var isCurrentlyVisible = function(by) {
         var elements = driver.findElements(by);
@@ -9,20 +7,20 @@ var Helper = function(driver) {
         if (elements.isEmpty()) {
             return false;
         } else {
-            test.log("numberOfElements: " + numberOfElements);
+            log("numberOfElements: " + numberOfElements);
             for (var i = 0; i < numberOfElements; i++) {
                 if (!elements.get(i).isDisplayed()) {
                     return false;
                 }
             }
-            test.log("Found: " + by);
+            log("Found: " + by);
             return true;
         }
     };
 
     var explicitWait = function(by, timeOut) {
         test.waitFor(function() {
-            test.log("Explicit wait for: " + by);
+            log("Explicit wait for: " + by);
             return isCurrentlyVisible(by);
         }, timeOut);
     };
@@ -37,7 +35,7 @@ var Helper = function(driver) {
             log("Hovering without timeout.");
         }
         explicitWait(by, timeOut);
-        this.action.moveToElement(this.driver.findElement(by)).build().perform();
+        this.action.moveToElement(driver.findElement(by)).build().perform();
     };
 
     this.writeText = function(by, text, timeOut) {
@@ -46,13 +44,13 @@ var Helper = function(driver) {
             log("Writing text without timeout.");
         }
         explicitWait(by, timeOut);
-        var element = this.driver.findElement(by);
+        var element = driver.findElement(by);
         element.clear();
         element.sendKeys(text);
     };
 
     this.navigateToUrl = function(url) {
-        this.driver.get(url);
+        driver.get(url);
     };
 
     this.clickElement = function(by, timeOut) {
@@ -61,10 +59,10 @@ var Helper = function(driver) {
             log("Clicking on element without timeout.");
         }
         explicitWait(by, timeOut);
-        this.driver.findElement(by).click();
+        driver.findElement(by).click();
     };
 
     this.executeScript = function(script) {
-        this.driver.executeScript(script);
+        driver.executeScript(script);
     };
 }

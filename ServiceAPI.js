@@ -1,8 +1,4 @@
-/**
- * 
- */
-
-var ServiceAPI = function(client) {
+function ServiceAPI(client) {
 
     this.client = client;
 

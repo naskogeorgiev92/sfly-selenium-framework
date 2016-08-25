@@ -10,8 +10,8 @@ eval(importFile(datafile('page-christmas-cards.js')));
 
 var driver = test.openBrowser();
 var c = driver.getHttpClient();
-var beacons = new Beacons(c);
-beacons.blacklist();
+var beacons = new Beacons();
+beacons.blacklist(c);
 
 var helper = new Helper(driver);
 var welcomePage = new WelcomePage(helper);

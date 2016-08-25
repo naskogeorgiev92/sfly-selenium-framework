@@ -3,6 +3,7 @@ var importFile = function(file) {
 };
 
 eval(importFile(datafile('helper.js')));
+eval(importFile(datafile('beacons.js')));
 eval(importFile(datafile('page-welcome.js')));
 eval(importFile(datafile('page-login.js')));
 eval(importFile(datafile('page-home.js')));
@@ -10,7 +11,8 @@ eval(importFile(datafile('page-photos.js')));
 
 var driver = test.openBrowser();
 var c = driver.getHttpClient();
-c.blacklistCommonUrls();
+var beacons = new Beacons();
+beacons.blacklist(c);
 
 var helper = new Helper(driver);
 var csv = test.getCSV("csv.csv");
