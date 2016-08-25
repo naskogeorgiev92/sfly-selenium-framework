@@ -1,12 +1,12 @@
-var importFile = function (file) { 
-	return file.readContents() + ""; 
+var importFile = function(file) {
+    return file.readContents() + "";
 };
 
 eval(importFile(datafile('helper.js')));
-eval(importFile(datafile('welcome-page.js')));
-eval(importFile(datafile('login-page.js')));
-eval(importFile(datafile('home-page.js')));
-eval(importFile(datafile('photos-page.js')));
+eval(importFile(datafile('page-welcome.js')));
+eval(importFile(datafile('page-login.js')));
+eval(importFile(datafile('page-home.js')));
+eval(importFile(datafile('page-photos.js')));
 
 var driver = test.openBrowser();
 var c = driver.getHttpClient();
