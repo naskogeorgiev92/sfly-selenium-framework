@@ -1,7 +1,7 @@
 function ChristmasCardsPage(helper) {
     this.closeDialogButton = By.className('x-button');
     this.firstCard = By.id("0");
-    this.personalizeButton = By.id("Cta_1155367");
+    this.personalizeButton = [By.id("0"), By.linkText("Personalize")];
     this.skipSuggestionButton = By.id("personalizeFormModalButton0");
     this.getPhotosButton = By.id("getPicturesBtnLarge");
     this.uploadButton = By.linkText('Upload');
@@ -20,7 +20,7 @@ function ChristmasCardsPage(helper) {
 
     this.personalizeCard = function() {
         helper.hover(this.firstCard);
-        helper.clickElement(this.personalizeButton);
+        helper.clickDeepElement(this.personalizeButton, 2000);
         helper.clickElement(this.skipSuggestionButton, 10000);
         helper.clickElement(this.getPhotosButton);
     };

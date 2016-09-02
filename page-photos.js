@@ -1,9 +1,13 @@
 function PhotosPage(helper) {
+    this.url = "https://photos.shutterfly.com/";
     this.uploadButton = By.linkText("Upload");
     this.selectFilesButton = By.className("file-upload-btn");
     this.inputFileField = By.cssSelector('input[type=file]:not([directory])');
     this.failureMessage = By.className("failed-sofar");
 
+    this.visit = function() {
+        helper.navigateToUrl(this.url);
+    };
 
     this.goToUpload = function() {
         helper.clickElement(this.uploadButton, 5000);

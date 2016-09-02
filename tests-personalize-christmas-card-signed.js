@@ -3,13 +3,13 @@ var importFile = function(file) {
 };
 
 eval(importFile(datafile('helper.js')));
-eval(importFile(datafile('beacons.js')));
+eval(importFile(datafile('Beacons.js')));
 eval(importFile(datafile('page-welcome.js')));
 eval(importFile(datafile('page-login.js')));
 eval(importFile(datafile('page-home.js')));
 eval(importFile(datafile('page-christmas-cards.js')));
 
-var driver = test.openBrowser();
+var driver = test.openBrowser('CHROME');
 var c = driver.getHttpClient();
 var beacons = new Beacons();
 beacons.blacklist(c);
