@@ -33,6 +33,7 @@ homePage.goToChristmasCards();
 christmasCardsPage.closePreviewDialog();
 christmasCardsPage.personalizeCard();
 christmasCardsPage.uploadTimelinePhotoSigned();
+christmasCardsPage.pressDoneButton();
 
 test.endStep();
 test.endTransaction();

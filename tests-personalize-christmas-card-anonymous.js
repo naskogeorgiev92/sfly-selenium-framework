@@ -29,6 +29,7 @@ homePage.goToChristmasCards();
 christmasCardsPage.closePreviewDialog();
 christmasCardsPage.personalizeCard();
 christmasCardsPage.uploadPhotoAnonymous(fileName);
+christmasCardsPage.pressDoneButton();
 
 test.endStep();
 test.endTransaction();

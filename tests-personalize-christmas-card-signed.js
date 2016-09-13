@@ -35,6 +35,7 @@ homePage.goToChristmasCards();
 christmasCardsPage.closePreviewDialog();
 christmasCardsPage.personalizeCard();
 christmasCardsPage.uploadPhotoSigned(fileName);
+christmasCardsPage.pressDoneButton();
 
 test.endStep();
 test.endTransaction();

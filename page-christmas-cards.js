@@ -13,7 +13,7 @@ function ChristmasCardsPage(helper) {
     this.firstPhoto = [By.className('shrUPG'), By.tagName('img')];
     this.doneButton = [By.className('shrUPNB'), By.linkText('Done')];
     this.uploadedImage = By.id(("picturestripItem-0"));
-    this.inputFileField = By.cssSelector('input[type=file]:not([directory])');
+    this.inputFileField = By.cssSelector('input[type=file]');
 
     this.closePreviewDialog = function () {
         helper.clickElement(this.closeDialogButton, 5000);
@@ -41,15 +41,18 @@ function ChristmasCardsPage(helper) {
     this.uploadTimelinePhotoSigned = function () {
         helper.clickElement(this.shutterflyPhotosButton, 5000);
         helper.clickElement(this.timelineButton, 2000);
-        helper.clickElement(this.timelinePhotos, 2000);
+        //helper.clickElement(this.timelinePhotos, 2000);
         helper.clickDeepElement(this.firstPhoto, 5000);
-        helper.clickDeepElement(this.doneButton, 2000);
-        helper.waitForElement(this.uploadedImage, 5000);
     };
 
     this.uploadPhoto = function (fileName) {
         helper.executeScript('a = $("input[type=file]"); a.removeClass("shrMCITF");');
         helper.writeText(this.inputFileField, filePath(fileName), 5000);
-        helper.executeScript("var e = $.Event('change'); e.originalEvent = {dataTransfer : { files : $('input[type=file]').get(0).files } }; $('input[type=file]').get(0).trigger(e);");
     }
+
+    this.pressDoneButton = function() {
+        helper.clickDeepElement(this.doneButton, 2000);
+        helper.waitForElement(this.uploadedImage, 5000);
+    }
+
 }
