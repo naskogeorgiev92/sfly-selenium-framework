@@ -18,6 +18,8 @@ var welcomePage = new WelcomePage(helper);
 var homePage = new HomePage(helper);
 var christmasCardsPage = new ChristmasCardsPage(helper);
 
+var fileName = "gag_5.jpg";
+
 test.beginTransaction();
 test.beginStep("Personalize Christmas Card Anonymous");
 
@@ -26,7 +28,7 @@ welcomePage.closeWelcomeDialog();
 homePage.goToChristmasCards();
 christmasCardsPage.closePreviewDialog();
 christmasCardsPage.personalizeCard();
-christmasCardsPage.uploadPhotoAnonymous();
+christmasCardsPage.uploadPhotoAnonymous(fileName);
 
 test.endStep();
 test.endTransaction();

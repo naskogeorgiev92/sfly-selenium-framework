@@ -14,7 +14,6 @@ var c = driver.getHttpClient();
 var beacons = new Beacons();
 beacons.blacklist(c);
 
-
 var helper = new Helper(driver);
 var csv = test.getCSV("csv.csv");
 var user = csv.get(0).get("user");

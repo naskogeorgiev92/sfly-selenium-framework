@@ -5,7 +5,7 @@ function HomePage(helper) {
 
     this.goToChristmasCards = function() {
         helper.hover(this.cardsLink, 10000);
-        helper.clickElement(this.christmasCardsLink);
+        helper.clickElement(this.christmasCardsLink, 10000);
     };
 
     this.goToMyPhotos = function() {
