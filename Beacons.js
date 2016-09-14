@@ -134,5 +134,9 @@ function Beacons() {
         client.blacklistRequests("https://csi\\.gstatic\\.com/.*", 200);
         client.blacklistRequests("https://rum-static\\.pingdom\\.net/.*", 200);
         client.blacklistRequests("https://web1\\.shutterfly\\.com/.*", 200);
-    }
+        client.blacklistRequests("https://c1\\.staticsfly\\.com/.*", 200);
+        client.blacklistRequests("https://c2\\.staticsfly\\.com/.*", 200);
+        client.blacklistRequests("https://c3\\.staticsfly\\.com/.*", 200);
+        client.blacklistRequests("https://c4\\.staticsfly\\.com/.*", 200);
+    };
 }

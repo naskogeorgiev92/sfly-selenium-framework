@@ -60,8 +60,9 @@ function Helper(driver) {
 
     this.clickDeepElement = function (bys, timeOut) {
         var element = driver.findElement(By.tagName('body'));
-        explicitWait(bys[0], timeOut);
+        
         for (var i = 0; i < bys.length; i++) {
+            explicitWait(bys[i], timeOut);
             element = element.findElement(bys[i]);
         }
         element.click();
@@ -70,5 +71,5 @@ function Helper(driver) {
     this.getSize = function () {
         var size = driver.Window.getSize();
         log(size);
-    }
+    };
 }

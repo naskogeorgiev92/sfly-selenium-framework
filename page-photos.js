@@ -16,7 +16,10 @@ function PhotosPage(helper) {
 
     this.uploadPhoto = function(fileName) {
         helper.executeScript('$("input[type=file]:not([directory])")[0].style="";');
-        helper.writeText(this.inputFileField, filePath(fileName), 5000);
+        var absolutePath = filePath(fileName);
+        test.log('path: ' + absolutePath);
+        test.log('name: ' + fileName);
+        helper.writeText(this.inputFileField, absolutePath, 5000);
         helper.executeScript("var e = $.Event('drop'); e.originalEvent = {dataTransfer : { files : $('input[type=file]:not([directory])').get(0).files } }; $('.dropzone-content').trigger(e);");
     };
 

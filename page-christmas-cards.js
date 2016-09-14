@@ -21,38 +21,41 @@ function ChristmasCardsPage(helper) {
 
     this.personalizeCard = function () {
         helper.hover(this.firstCard);
-        helper.clickElement(this.personalizeButton, 2000);
+        helper.clickElement(this.personalizeButton, 5000);
         helper.clickElement(this.skipSuggestionButton, 10000);
         helper.clickElement(this.getPhotosButton);
     };
 
     this.uploadPhotoAnonymous = function (fileName) {
-        helper.clickElement(this.uploadButton, 5000);
-        helper.waitForElement(this.selectPhotosButton, 2000);
+        helper.clickElement(this.uploadButton, 10000);
+        helper.waitForElement(this.selectPhotosButton, 5000);
         this.uploadPhoto(fileName);
     };
 
     this.uploadPhotoSigned = function (fileName) {
         helper.clickElement(this.myComputerButton, 10000);
-        helper.waitForElement(this.selectPhotosButton, 2000);
+        helper.waitForElement(this.selectPhotosButton, 5000);
         this.uploadPhoto(fileName);
     };
 
     this.uploadTimelinePhotoSigned = function () {
         helper.clickElement(this.shutterflyPhotosButton, 5000);
-        helper.clickElement(this.timelineButton, 2000);
-        //helper.clickElement(this.timelinePhotos, 2000);
+        helper.clickElement(this.timelineButton, 5000);
+        //helper.clickElement(this.timelinePhotos, 5000);
         helper.clickDeepElement(this.firstPhoto, 5000);
     };
 
     this.uploadPhoto = function (fileName) {
-        helper.executeScript('a = $("input[type=file]"); a.removeClass("shrMCITF");');
-        helper.writeText(this.inputFileField, filePath(fileName), 5000);
-    }
+        helper.executeScript('a = $("input[type=file]"); a.removeClass("shrMCITF"); a.removeAttr("accept");');
+        var absolutePath = filePath(fileName);
+        test.log('path: ' + absolutePath);
+        test.log('name: ' + fileName);
+        helper.writeText(this.inputFileField, absolutePath, 5000);
+    };
 
     this.pressDoneButton = function() {
-        helper.clickDeepElement(this.doneButton, 2000);
+        helper.clickDeepElement(this.doneButton, 10000);
         helper.waitForElement(this.uploadedImage, 5000);
-    }
+    };
 
 }
