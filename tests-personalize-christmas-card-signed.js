@@ -2,7 +2,8 @@ var importFile = function (file) {
     return file.readContents() + "";
 };
 
-eval(importFile(datafile('helper.js')));
+eval(importFile(datafile('controller-browser.js')));
+eval(importFile(datafile('controller-api.js')));
 eval(importFile(datafile('Beacons.js')));
 eval(importFile(datafile('page-welcome.js')));
 eval(importFile(datafile('page-login.js')));
@@ -14,19 +15,22 @@ var c = driver.getHttpClient();
 var beacons = new Beacons();
 beacons.blacklist(c);
 
-var helper = new Helper(driver);
+var browser = new BrowserController(driver);
+var api = new ApiController(c);
 var csv = test.getCSV("csv.csv");
 var user = csv.get(0).get("user");
 var pass = csv.get(0).get("pass");
-var welcomePage = new WelcomePage(helper);
-var loginPage = new LoginPage(helper);
-var homePage = new HomePage(helper);
-var christmasCardsPage = new ChristmasCardsPage(helper);
+var welcomePage = new WelcomePage(browser);
+var loginPage = new LoginPage(browser);
+var homePage = new HomePage(browser);
+var christmasCardsPage = new ChristmasCardsPage(browser);
 
 var fileName = "gag_5.jpg";
 
 test.beginTransaction();
 test.beginStep("Personalize Christmas Card Signed");
+
+api.cleanProfile(user, pass);
 
 welcomePage.visit();
 welcomePage.goToLogin();

@@ -4,6 +4,7 @@ function PhotosPage(helper) {
     this.selectFilesButton = By.className("file-upload-btn");
     this.inputFileField = By.cssSelector('input[type=file]:not([directory])');
     this.failureMessage = By.className("failed-sofar");
+    this.successMessage = By.className("upload-success-message");
 
     this.visit = function() {
         helper.navigateToUrl(this.url);
@@ -25,5 +26,9 @@ function PhotosPage(helper) {
 
     this.waitForFailure = function() {
         helper.waitForElement(this.failureMessage, 15000);
+    };
+
+    this.waitForSuccess = function() {
+        helper.waitForElement(this.successMessage, 15000);
     };
 }

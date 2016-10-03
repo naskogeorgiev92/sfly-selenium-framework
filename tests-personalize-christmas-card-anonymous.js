@@ -3,7 +3,7 @@ var importFile = function(file) {
 };
 
 eval(importFile(datafile('Beacons.js')));
-eval(importFile(datafile('helper.js')));
+eval(importFile(datafile('controller-browser.js')));
 eval(importFile(datafile('page-welcome.js')));
 eval(importFile(datafile('page-home.js')));
 eval(importFile(datafile('page-christmas-cards.js')));
@@ -13,15 +13,16 @@ var c = driver.getHttpClient();
 var beacons = new Beacons();
 beacons.blacklist(c);
 
-var helper = new Helper(driver);
-var welcomePage = new WelcomePage(helper);
-var homePage = new HomePage(helper);
-var christmasCardsPage = new ChristmasCardsPage(helper);
+var browser = new BrowserController(driver);
+var welcomePage = new WelcomePage(browser);
+var homePage = new HomePage(browser);
+var christmasCardsPage = new ChristmasCardsPage(browser);
 
-var fileName = "gag_5.jpg";
 
 test.beginTransaction();
 test.beginStep("Personalize Christmas Card Anonymous");
+
+var fileName = "gag_5.jpg";
 
 welcomePage.visit();
 welcomePage.closeWelcomeDialog();

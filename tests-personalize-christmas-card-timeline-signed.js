@@ -2,7 +2,8 @@ var importFile = function(file) {
     return file.readContents() + "";
 };
 
-eval(importFile(datafile('helper.js')));
+eval(importFile(datafile('controller-browser.js')));
+eval(importFile(datafile('controller-api.js')));
 eval(importFile(datafile('Beacons.js')));
 eval(importFile(datafile('page-welcome.js')));
 eval(importFile(datafile('page-login.js')));
@@ -10,21 +11,31 @@ eval(importFile(datafile('page-home.js')));
 eval(importFile(datafile('page-christmas-cards.js')));
 
 var driver = test.openBrowser('CHROME');
-var c = driver.getHttpClient();
+var client = driver.getHttpClient();
 var beacons = new Beacons();
-beacons.blacklist(c);
+beacons.blacklist(client);
 
-var helper = new Helper(driver);
+
 var csv = test.getCSV("csv.csv");
 var user = csv.get(0).get("user");
 var pass = csv.get(0).get("pass");
-var welcomePage = new WelcomePage(helper);
-var loginPage = new LoginPage(helper);
-var homePage = new HomePage(helper);
-var christmasCardsPage = new ChristmasCardsPage(helper);
+
+var api = new ApiController(client);
+var browser = new BrowserController(driver);
+var welcomePage = new WelcomePage(browser);
+var loginPage = new LoginPage(browser);
+var homePage = new HomePage(browser);
+var christmasCardsPage = new ChristmasCardsPage(browser);
+
+var fileName = "3.JPG"
+var file = datafile(fileName);
 
 test.beginTransaction();
 test.beginStep("Personalize Christmas Card Timeline Signed");
+
+api.cleanProfile(user, pass);
+var loginResponse = api.getThisLifesUser(user, pass);
+api.doSignedUpload(api.getUserId(loginResponse), "MyFolder", "MyAlbum", file, fileName );
 
 welcomePage.visit();
 welcomePage.goToLogin();

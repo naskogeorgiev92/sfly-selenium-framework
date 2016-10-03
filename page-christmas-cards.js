@@ -41,12 +41,11 @@ function ChristmasCardsPage(helper) {
     this.uploadTimelinePhotoSigned = function () {
         helper.clickElement(this.shutterflyPhotosButton, 5000);
         helper.clickElement(this.timelineButton, 5000);
-        //helper.clickElement(this.timelinePhotos, 5000);
         helper.clickDeepElement(this.firstPhoto, 5000);
     };
 
     this.uploadPhoto = function (fileName) {
-        helper.executeScript('a = $("input[type=file]"); a.removeClass("shrMCITF"); a.removeAttr("accept");');
+        helper.executeScript('a = $("input[type=file]"); a.removeClass("shrMCITF");');
         var absolutePath = filePath(fileName);
         test.log('path: ' + absolutePath);
         test.log('name: ' + fileName);
