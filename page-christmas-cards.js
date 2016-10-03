@@ -1,4 +1,5 @@
-function ChristmasCardsPage(helper) {
+function ChristmasCardsPage(browser) {
+    
     this.closeDialogButton = By.className('x-button');
     this.firstCard = By.id("0");
     this.personalizeButton = By.linkText("Personalize");
@@ -16,45 +17,45 @@ function ChristmasCardsPage(helper) {
     this.inputFileField = By.cssSelector('input[type=file]');
 
     this.closePreviewDialog = function () {
-        helper.clickElement(this.closeDialogButton, 5000);
+        browser.clickElement(this.closeDialogButton, 5000);
     };
 
     this.personalizeCard = function () {
-        helper.hover(this.firstCard);
-        helper.clickElement(this.personalizeButton, 5000);
-        helper.clickElement(this.skipSuggestionButton, 10000);
-        helper.clickElement(this.getPhotosButton);
+        browser.hover(this.firstCard);
+        browser.clickElement(this.personalizeButton, 5000);
+        browser.clickElement(this.skipSuggestionButton, 10000);
+        browser.clickElement(this.getPhotosButton);
     };
 
     this.uploadPhotoAnonymous = function (fileName) {
-        helper.clickElement(this.uploadButton, 10000);
-        helper.waitForElement(this.selectPhotosButton, 5000);
+        browser.clickElement(this.uploadButton, 10000);
+        browser.waitForElement(this.selectPhotosButton, 5000);
         this.uploadPhoto(fileName);
     };
 
     this.uploadPhotoSigned = function (fileName) {
-        helper.clickElement(this.myComputerButton, 10000);
-        helper.waitForElement(this.selectPhotosButton, 5000);
+        browser.clickElement(this.myComputerButton, 10000);
+        browser.waitForElement(this.selectPhotosButton, 5000);
         this.uploadPhoto(fileName);
     };
 
     this.uploadTimelinePhotoSigned = function () {
-        helper.clickElement(this.shutterflyPhotosButton, 5000);
-        helper.clickElement(this.timelineButton, 5000);
-        helper.clickDeepElement(this.firstPhoto, 5000);
+        browser.clickElement(this.shutterflyPhotosButton, 10000);
+        browser.clickElement(this.timelineButton, 5000);
+        browser.clickDeepElement(this.firstPhoto, 5000);
     };
 
     this.uploadPhoto = function (fileName) {
-        helper.executeScript('a = $("input[type=file]"); a.removeClass("shrMCITF");');
+        browser.executeScript('a = $("input[type=file]"); a.removeClass("shrMCITF");');
         var absolutePath = filePath(fileName);
         test.log('path: ' + absolutePath);
         test.log('name: ' + fileName);
-        helper.writeText(this.inputFileField, absolutePath, 5000);
+        browser.writeText(this.inputFileField, absolutePath, 5000);
     };
 
     this.pressDoneButton = function() {
-        helper.clickDeepElement(this.doneButton, 10000);
-        helper.waitForElement(this.uploadedImage, 5000);
+        browser.clickDeepElement(this.doneButton, 10000);
+        browser.waitForElement(this.uploadedImage, 5000);
     };
 
 }

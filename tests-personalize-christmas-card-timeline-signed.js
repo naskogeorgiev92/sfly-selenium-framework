@@ -27,7 +27,7 @@ var loginPage = new LoginPage(browser);
 var homePage = new HomePage(browser);
 var christmasCardsPage = new ChristmasCardsPage(browser);
 
-var fileName = "3.JPG"
+var fileName = "gag_5.jpg";
 var file = datafile(fileName);
 
 test.beginTransaction();

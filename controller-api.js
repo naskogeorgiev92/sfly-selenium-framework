@@ -23,7 +23,7 @@ function ApiController(client) {
                 '' + lifeuid
             ],
             "id": null
-        }))
+        }));
 
         var response = postRequest.execute();
         validateResponse(response);
@@ -31,7 +31,7 @@ function ApiController(client) {
         var ids = [];
         var jsonResponse = JSON.parse(response.getBody());
         for (var i = 0; i < jsonResponse.result.payload.table_items.length; i++) {
-            ids.push(jsonResponse.result.payload.table_items[i].uid)
+            ids.push(jsonResponse.result.payload.table_items[i].uid);
         }
         log("ApiController INFO: Successfully got the Moment UIDs");
         return ids;
@@ -100,7 +100,7 @@ function ApiController(client) {
                 var story_uid = sub_group[j].story_uid;
                 log("ApiController INFO: Found story_uid: " + story_uid);
                 if ((story_uid != null) || (story_uid != undefined)) {
-                    var postRequest = this.client.newPost(this.photosUrl);
+                    postRequest = this.client.newPost(this.photosUrl);
                     postRequest.setRequestBody(JSON.stringify({
                         "id": null,
                         "method": "album.deleteAlbum",
@@ -109,7 +109,7 @@ function ApiController(client) {
                         ]
                     }));
 
-                    var response = postRequest.execute();
+                    response = postRequest.execute();
                     validateResponse(response);
                 }
             }
