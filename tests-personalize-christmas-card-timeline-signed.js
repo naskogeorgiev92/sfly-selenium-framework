@@ -15,7 +15,6 @@ var client = driver.getHttpClient();
 var beacons = new Beacons();
 beacons.blacklist(client);
 
-
 var csv = test.getCSV("csv.csv");
 var user = csv.get(0).get("user");
 var pass = csv.get(0).get("pass");
@@ -28,7 +27,7 @@ var homePage = new HomePage(browser);
 var christmasCardsPage = new ChristmasCardsPage(browser);
 
 var fileName = "gag_5.jpg";
-var file = datafile(fileName);
+var file = datafile("gag_5.jpg");
 
 test.beginTransaction();
 test.beginStep("Personalize Christmas Card Timeline Signed");

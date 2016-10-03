@@ -53,7 +53,7 @@ function ApiController(client) {
         var response = postRequest.execute();
         validateResponse(response);
 
-        log("ApiController INFO: Login successfull");
+        log("ApiController INFO: Login successful");
         return response;
     };
 
@@ -122,10 +122,11 @@ function ApiController(client) {
 
     this.doSignedUpload = function(uid, folder, album, file, filename) {
         var url = "https://uniup.shutterfly.com/services/shutterfly-upload/" + uid + "/images?folderTitle=" + folder + "&albumName=" + album;
+        log("ApiController INFO: URL is: " + url);
         log("ApiController INFO: Performing signed upload.");
 
         var postRequest = client.newPost(url);
-        postRequest.addFileUpload("Image.Data", file, " image/jpeg");
+        postRequest.addFileUpload("Image.Data", file, "image/jpeg");
         postRequest.addRequestParameters({
             'Content-Type': "multipart/form-data",
             'filename': filename
@@ -133,7 +134,7 @@ function ApiController(client) {
 
         var response = postRequest.execute();
         validateResponse(response);
-        log("ApiController INFO: Upload was successfull.");
+        log("ApiController INFO: Upload was successful.");
 
         return response;
     };
