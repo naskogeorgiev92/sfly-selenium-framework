@@ -19,8 +19,6 @@ function PhotosPage(browser) {
     this.uploadPhoto = function(fileName) {
         browser.executeScript('$("input[type=file]:not([directory])")[0].style="";');
         var absolutePath = filePath(fileName);
-        test.log('path: ' + absolutePath);
-        test.log('name: ' + fileName);
         browser.writeText(this.inputFileField, absolutePath, 5000);
         browser.executeScript("var e = $.Event('drop'); e.originalEvent = {dataTransfer : { files : $('input[type=file]:not([directory])').get(0).files } }; $('.dropzone-content').trigger(e);");
     };

@@ -1,6 +1,10 @@
 function BrowserController(driver) {
     
+     eval(datafile('logger.js').readContents() + "");
+     
     this.action = new Actions(driver);
+
+    var logger = new Logger(BrowserController.name);
 
     var isCurrentlyVisible = function(by, element) {
         var elements;
@@ -14,47 +18,43 @@ function BrowserController(driver) {
         if (elements.isEmpty()) {
             return false;
         } else {
-            log("numberOfElements: " + elements.size());
+            logger.info("Number of elements: " + elements.size());
             if (!elements.get(0).isDisplayed() || !elements.get(0).isEnabled()) {
                      return false;
                  }
-            log("Found: " + by);
+            logger.info("Found: " + by);
             return true;
         }
-    };
-
-    var explicitWait = function(by, timeOut) {
-        if (timeOut == null) {
-            timeOut = 3000;
-        }
-        waitFor(function() {
-            log("Explicit wait for: " + by);
-            return isCurrentlyVisible(by);
-        }, timeOut);
-    };
+    };    
 
     this.waitForDeepElement = function(by, element, timeOut) {
         if (timeOut == null) {
             timeOut = 3000;
         }
         waitFor(function() {
-            log("Explicit wait for deep element: " + by);
+            logger.info("Waiting for deep element: " + by);
             return isCurrentlyVisible(by, element);
         }, timeOut);
     };
 
     this.waitForElement = function(by, timeOut) {
-        explicitWait(by, timeOut);
+        if (timeOut == null) {
+            timeOut = 3000;
+        }
+        waitFor(function() {
+            logger.info("Waiting for: " + by);
+            return isCurrentlyVisible(by);
+        }, timeOut);
     };
 
     this.hover = function(by, timeOut) {
-        explicitWait(by, timeOut);
+        this.waitForElement(by, timeOut);
         this.action.moveToElement(driver.findElement(by)).build().perform();
         pause(1000);
     };
 
     this.writeText = function(by, text, timeOut) {
-        explicitWait(by, timeOut);
+        this.waitForElement(by, timeOut);
         var element = driver.findElement(by);
         element.clear();
         element.sendKeys(text);
@@ -65,12 +65,12 @@ function BrowserController(driver) {
     };
 
     this.clickElement = function(by, timeOut) {
-        explicitWait(by, timeOut);
+        this.waitForElement(by, timeOut);
         driver.findElement(by).click();
     };
 
     this.executeScript = function(script) {
-        log('Executing script: ' + script);
+        logger.info('Executing script: ' + script);
         driver.executeScript(script);
     };
 

@@ -1,6 +1,6 @@
 function Logger(tag) {
 
-	this.tag = tag
+	this.tag = tag;
 
 	this.info = function(message) {
 		if(tag == null || tag == undefined) {
@@ -8,7 +8,7 @@ function Logger(tag) {
 		}
 
 		log(tag + " INFO: " + message);
-	}
+	};
 
 	this.debug = function(message) {
 		if(tag == null || tag == undefined) {
@@ -16,7 +16,7 @@ function Logger(tag) {
 		}
 
 		log(tag + " DEBUG: " + message);
-	}
+	};
 
 	this.error = function(message) {
 		if(tag == null || tag == undefined) {
@@ -24,5 +24,5 @@ function Logger(tag) {
 		}
 
 		throw (tag + " ERROR: " + message);
-	}
+	};
 }

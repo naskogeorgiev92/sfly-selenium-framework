@@ -48,8 +48,6 @@ function ChristmasCardsPage(browser) {
     this.uploadPhoto = function (fileName) {
         browser.executeScript('a = $("input[type=file]"); a.removeClass("shrMCITF");');
         var absolutePath = filePath(fileName);
-        test.log('path: ' + absolutePath);
-        test.log('name: ' + fileName);
         browser.writeText(this.inputFileField, absolutePath, 5000);
     };
 

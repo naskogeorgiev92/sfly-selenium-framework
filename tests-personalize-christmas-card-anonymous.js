@@ -9,9 +9,9 @@ eval(importFile(datafile('page-home.js')));
 eval(importFile(datafile('page-christmas-cards.js')));
 
 var driver = test.openBrowser('CHROME');
-var c = driver.getHttpClient();
+var client = driver.getHttpClient();
 var beacons = new Beacons();
-beacons.blacklist(c);
+beacons.blacklist(client);
 
 var browser = new BrowserController(driver);
 var welcomePage = new WelcomePage(browser);

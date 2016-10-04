@@ -11,12 +11,12 @@ eval(importFile(datafile('page-home.js')));
 eval(importFile(datafile('page-photos.js')));
 
 var driver = test.openBrowser('CHROME');
-var c = driver.getHttpClient();
+var client = driver.getHttpClient();
 var beacons = new Beacons();
-beacons.blacklist(c);
+beacons.blacklist(client);
 
 var browser = new BrowserController(driver);
-var api = new ApiController(c);
+var api = new ApiController(client);
 var csv = test.getCSV("csv.csv");
 var user = csv.get(0).get("user");
 var pass = csv.get(0).get("pass");
@@ -32,7 +32,6 @@ test.beginTransaction();
 test.beginStep("Upload new photo to My Photos.");
 
 api.cleanProfile(user, pass);
-api.doSignedUpload(user, pass, "MyFolder", "MyAlbum", file);
 
 welcomePage.visit();
 welcomePage.goToLogin();
