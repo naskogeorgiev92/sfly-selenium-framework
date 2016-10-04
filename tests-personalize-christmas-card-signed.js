@@ -1,4 +1,4 @@
-var importFile = function (file) {
+var importFile = function(file) {
     return file.readContents() + "";
 };
 
