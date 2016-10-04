@@ -1,19 +1,23 @@
 function ApiController(client) {
 
+    eval(datafile('logger.js').readContents() + "");
+
     this.client = client;
     this.photosUrl = 'https://cmd.thislife.com/json';
 
+    var logger = new Logger(ApiController.name);
+
     var validateResponse = function(response) {
         if (response == null) {
-            throw ("ApiController ERROR: Failed to get response from server!");
+            logger.error("Failed to get response from server!");
         }
         if (response.getStatusCode() != 200) {
-            throw ("ApiController ERROR: Server returned status code <" + response.getStatusCode() + ">");
+            logger.error("Server returned status code <" + response.getStatusCode() + ">");
         }
     };
 
     this.getMomentIds = function(authKey, lifeuid) {
-        log("ApiController INFO: getting saved moment ids...");
+        logger.info("Getting saved moment ids...");
 
         var postRequest = this.client.newPost(this.photosUrl);
         postRequest.setRequestBody(JSON.stringify({
@@ -33,12 +37,12 @@ function ApiController(client) {
         for (var i = 0; i < jsonResponse.result.payload.table_items.length; i++) {
             ids.push(jsonResponse.result.payload.table_items[i].uid)
         }
-        log("ApiController INFO: Successfully got the Moment UIDs");
+        logger.info("Successfully got the Moment UIDs!");
         return ids;
     };
 
     this.getThisLifesUser = function(user, pass) {
-        log("ApiController INFO: getting thisLife user details for credentials: " + user + " / " + pass);
+        logger.info("Getting thisLife user details for credentials: " + user + " / " + pass);
 
         var postRequest = this.client.newPost(this.photosUrl);
         postRequest.setRequestBody(JSON.stringify({
@@ -53,12 +57,12 @@ function ApiController(client) {
         var response = postRequest.execute();
         validateResponse(response);
 
-        log("ApiController INFO: Login successfull");
+        logger.info("Login successfull!");
         return response;
     };
 
     this.deleteMoments = function(authKey, momentIds) {
-        log("ApiController INFO: Deleting saved Moments...");
+        logger.info("Deleting saved Moments...");
 
         var postRequest = this.client.newPost(this.photosUrl);
         postRequest.setRequestBody(JSON.stringify({
@@ -72,12 +76,12 @@ function ApiController(client) {
 
         var response = postRequest.execute();
         validateResponse(response);
-        log("ApiController INFO: Deleted all moments.");
+        logger.info("Deleted all moments!");
         return response;
     };
 
     this.deleteAllAlbums = function(authKey, lifeUid) {
-        log("ApiController INFO: Deleting saved albums...");
+        logger.info("Deleting saved albums...");
 
         var postRequest = this.client.newPost(this.photosUrl);
         postRequest.setRequestBody(JSON.stringify({
@@ -98,7 +102,7 @@ function ApiController(client) {
 
             for (var j = i; j < sub_group.length; j++) {
                 var story_uid = sub_group[j].story_uid;
-                log("ApiController INFO: Found story_uid: " + story_uid);
+                logger.info("Found story_uid: " + story_uid);
                 if ((story_uid != null) || (story_uid != undefined)) {
                     var postRequest = this.client.newPost(this.photosUrl);
                     postRequest.setRequestBody(JSON.stringify({
@@ -115,31 +119,32 @@ function ApiController(client) {
             }
         }
 
-        log("ApiController INFO: Deleted all albums.");
+        logger.info("Deleted all albums!");
 
         return response;
     };
 
-    this.doSignedUpload = function(uid, folder, album, file, filename) {
-        var url = "https://uniup.shutterfly.com/services/shutterfly-upload/" + uid + "/images?folderTitle=" + folder + "&albumName=" + album;
-        log("ApiController INFO: Performing signed upload.");
+    this.doSignedUpload = function(username, password, folder, album, file) {
+        logger.info("Performing signed upload...");
 
+        var uid = this.getUserId( this.getThisLifesUser(username, password) );
+
+        var url = "https://uniup.shutterfly.com/services/shutterfly-upload/" + uid + "/images?folderTitle=" + folder + "&albumName=" + album;
         var postRequest = client.newPost(url);
-        postRequest.addFileUpload("Image.Data", file, " image/jpeg");
+        postRequest.addFileUpload("Image.Data", file, "image/jpeg");
         postRequest.addRequestParameters({
             'Content-Type': "multipart/form-data",
-            'filename': filename
         });
 
         var response = postRequest.execute();
         validateResponse(response);
-        log("ApiController INFO: Upload was successfull.");
+        logger.info("Upload was successfull!");
 
         return response;
     };
 
     this.cleanProfile = function(username, password) {
-        log("ApiController INFO: Cleaning profile " + username);
+        logger.info("Cleaning profile " + username);
         var response = this.getThisLifesUser(username, password);
         var userJson = JSON.parse(response.getBody());
 
@@ -149,7 +154,7 @@ function ApiController(client) {
         var moments = this.getMomentIds(sessionToken, lifeUid);
         this.deleteMoments(sessionToken, moments);
         this.deleteAllAlbums(sessionToken, lifeUid);
-        log("ApiController INFO: Profile was cleaned successfully.");
+        logger.info("Profile was cleaned successfully!");
     };
 
     this.getUserId = function(resp) {

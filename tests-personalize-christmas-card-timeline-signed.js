@@ -27,8 +27,7 @@ var loginPage = new LoginPage(browser);
 var homePage = new HomePage(browser);
 var christmasCardsPage = new ChristmasCardsPage(browser);
 
-var fileName = "3.JPG"
-var file = datafile(fileName);
+var file = datafile("3.JPG");
 
 test.beginTransaction();
 test.beginStep("Personalize Christmas Card Timeline Signed");
