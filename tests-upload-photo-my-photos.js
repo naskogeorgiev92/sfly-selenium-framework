@@ -5,9 +5,6 @@ var importFile = function(file) {
 eval(importFile(datafile('controller-browser.js')));
 eval(importFile(datafile('controller-api.js')));
 eval(importFile(datafile('Beacons.js')));
-eval(importFile(datafile('page-welcome.js')));
-eval(importFile(datafile('page-login.js')));
-eval(importFile(datafile('page-home.js')));
 eval(importFile(datafile('page-photos.js')));
 
 var driver = test.openBrowser('CHROME');
@@ -20,24 +17,19 @@ var api = new ApiController(client);
 var csv = test.getCSV("csv.csv");
 var user = csv.get(0).get("user");
 var pass = csv.get(0).get("pass");
-var welcomePage = new WelcomePage(browser);
-var loginPage = new LoginPage(browser);
-var homePage = new HomePage(browser);
 var photosPage = new PhotosPage(browser);
 
 var fileName = "gag_5.jpg";
-var file = datafile(fileName);
 
 test.beginTransaction();
 test.beginStep("Upload new photo to My Photos.");
 
 api.cleanProfile(user, pass);
 
-welcomePage.visit();
-welcomePage.goToLogin();
-loginPage.login(user, pass);
 photosPage.visit();
-photosPage.goToUpload();
+photosPage.login(user, pass);
+photosPage.goToAlbums();
+photosPage.createAlbum("2016-12-15");
 photosPage.uploadPhoto(fileName);
 photosPage.waitForSuccess();
 
