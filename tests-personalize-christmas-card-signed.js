@@ -25,7 +25,7 @@ var loginPage = new LoginPage(browser);
 var homePage = new HomePage(browser);
 var christmasCardsPage = new ChristmasCardsPage(browser);
 
-var fileName = "gag_5.jpg";
+var fileName = "07.jpg";
 
 test.beginTransaction();
 test.beginStep("Personalize Christmas Card Signed");

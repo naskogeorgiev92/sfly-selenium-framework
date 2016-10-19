@@ -30,6 +30,7 @@ function PhotosPage(browser) {
     };
 
     this.createAlbum = function(albumName) {
+        pause(3000);
         browser.writeText(this.albumNameInput, albumName, 15000);
         browser.clickElement(this.createButton, 5000);
     };

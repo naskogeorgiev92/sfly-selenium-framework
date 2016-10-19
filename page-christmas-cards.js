@@ -52,8 +52,11 @@ function ChristmasCardsPage(browser) {
     };
 
     this.pressDoneButton = function() {
+        pause(3000);
         browser.clickDeepElement(this.doneButton, 10000);
+        pause(30000);
         browser.waitForElement(this.uploadedImage, 5000);
+        pause(3000);
     };
 
 }
