@@ -13,6 +13,15 @@ function PhotosPage(browser) {
     this.inputFileField = By.cssSelector('input[type=file]:not([directory])');
     this.failureMessage = By.className("failed-sofar");
     this.successMessage = By.className("upload-success-message");
+    this.albumImage = By.cssSelector('div.framed_moment_media > div.img');
+    this.photoToSelect = By.cssSelector('div#js_story div.framed_moment');
+    this.organizeTab = By.className('select_action.edit');
+    this.moreMenu = By.className('more.menu');
+    this.changeDate = By.xpath("//li[@class='date']");
+    this.setTheDateButton = By.linkText("Set the date");
+    this.selectedPhoto = By.cssSelector('div.framed_moment.selected');
+    this.frameView = By.cssSelector('div.framed_moment.selected div.action_fmv');
+    this.dateWrapper = By.className('date_wrap');
 
     this.visit = function() {
         browser.navigateToUrl(this.url);
@@ -52,5 +61,18 @@ function PhotosPage(browser) {
 
     this.waitForSuccess = function() {
         browser.waitForElement(this.successMessage, 15000);
+    };
+
+    this.changeDate = function(dateChange) {
+        browser.clickElement(this.albumImage, 5000);
+        browser.clickElement(this.photoToSelect, 5000);
+        browser.clickElement(this.organizeTab, 5000);
+        browser.hover(this.moreMenu, 5000);
+        browser.clickElement(this.changeDate, 5000);
+        browser.executeScript("$('.popover .select_wrap.year option[value="+dateChange+"]')[0].setAttribute('selected', 'selected');");
+        browser.clickElement(this.setTheDateButton, 5000);
+        browser.hover(this.selectedPhoto, 15000);
+        browser.clickElement(this.frameView, 5000);
+        assertTrue(getElementText(this.dateWrapper, 5000).indexOf(dateChange) > -1);
     };
 }

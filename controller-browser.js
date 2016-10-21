@@ -83,4 +83,9 @@ function BrowserController(driver) {
         }
         element.click();
     };
+
+    this.getElementText = function(by, timeOut) {
+        this.waitForElement(by, timeOut);
+        return driver.findElement(by).getText();
+    };
 }
