@@ -9,6 +9,7 @@ function ChristmasCardsPage(browser) {
     this.myComputerButton = By.className('shrUPMC');
     this.selectPhotosButton = By.linkText('Select photos from your computer');
     this.shutterflyPhotosButton = By.className('shrUPSFLY');
+    this.albumsButton = By.className('shrTLAlbumsFolder');
     this.timelineButton = By.className('shrTLTimelineFolder');
     this.timelinePhotos = By.className("shrUPAlbum");
     this.firstPhoto = [By.className('shrUPG'), By.tagName('img')];
@@ -42,6 +43,12 @@ function ChristmasCardsPage(browser) {
     this.uploadTimelinePhotoSigned = function () {
         browser.clickElement(this.shutterflyPhotosButton, 10000);
         browser.clickElement(this.timelineButton, 5000);
+        browser.clickDeepElement(this.firstPhoto, 5000);
+    };
+
+    this.uploadAlbumsPhotoSigned = function () {
+        browser.clickElement(this.shutterflyPhotosButton, 10000);
+        browser.clickElement(this.albumsButton, 5000);
         browser.clickDeepElement(this.firstPhoto, 5000);
     };
 

@@ -33,7 +33,7 @@ test.beginTransaction();
 test.beginStep("Personalize Christmas Card Timeline Signed");
 
 api.cleanProfile(user, pass);
-api.doSignedUpload(user, pass, "MyFolder", "MyAlbum", file);
+api.doSignedUpload(user, pass, "My Albums", "MyAlbum", file);
 
 welcomePage.visit();
 welcomePage.goToLogin();
@@ -41,7 +41,7 @@ loginPage.login(user, pass);
 homePage.goToChristmasCards();
 christmasCardsPage.closePreviewDialog();
 christmasCardsPage.personalizeCard();
-christmasCardsPage.uploadTimelinePhotoSigned();
+christmasCardsPage.uploadAlbumsPhotoSigned();
 christmasCardsPage.pressDoneButton();
 
 test.endStep();
