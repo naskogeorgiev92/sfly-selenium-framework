@@ -4,6 +4,7 @@ function ApiController(client) {
 
     this.client = client;
     this.photosUrl = 'https://cmd.thislife.com/json';
+    this.baseUrl = 'https://www.shutterfly.com';
 
     var logger = new Logger(ApiController.name);
 
@@ -41,8 +42,8 @@ function ApiController(client) {
         return ids;
     };
 
-    this.getThisLifesUser = function(user, pass) {
-        logger.info("Getting thisLife user details for credentials: " + user + " / " + pass);
+    this.login = function(user, pass) {
+        logger.info("Logging in with credentials: " + user + " / " + pass);
 
         var postRequest = this.client.newPost(this.photosUrl);
         postRequest.setRequestBody(JSON.stringify({
@@ -127,7 +128,7 @@ function ApiController(client) {
     this.doSignedUpload = function(username, password, folder, album, file) {
         logger.info("Performing signed upload...");
 
-        var uid = this.getUserId( this.getThisLifesUser(username, password) );
+        var uid = this.getUserId(this.login(username, password));
 
         var url = "https://uniup.shutterfly.com/services/shutterfly-upload/" + uid + "/images?folderTitle=" + folder + "&albumName=" + album;
         var postRequest = client.newPost(url);
@@ -143,9 +144,30 @@ function ApiController(client) {
         return response;
     };
 
+    this.setOnboarding = function(sessionToken) {
+        logger.info("Setting onboarding process...");
+
+        var postRequest = this.client.newPost(this.photosUrl);
+        postRequest.setRequestBody(JSON.stringify({
+            "method": "migration.setOnboardingDone",
+            "params": [
+                '' + sessionToken
+            ],
+            "headers": {
+                "X-SFLY-SubSource": "library"
+            },
+            "id": null
+        }));
+
+        var response = postRequest.execute();
+        validateResponse(response);
+        logger.info("Onboarding updated");
+        return response;
+    }
+
     this.cleanProfile = function(username, password) {
         logger.info("Cleaning profile " + username);
-        var response = this.getThisLifesUser(username, password);
+        var response = this.login(username, password);
         var userJson = JSON.parse(response.getBody());
 
         var sessionToken = userJson.result.payload.sessionToken;
@@ -161,4 +183,30 @@ function ApiController(client) {
         var body = JSON.parse(resp.getBody());
         return body.result.payload.person.uid;
     };
+
+    this.getSessionToken = function(resp) {
+        var body = JSON.parse(resp.getBody());
+        return body.result.payload.sessionToken;
+    };
+
+    this.signUp = function(usr, pwd) {
+        var url = this.baseUrl + "/nonVisualSignup/start.sfly";
+        logger.info("Signing up with credentials: " + usr + "/" + pwd);
+
+        var postRequest = this.client.newPost(url);
+        postRequest.addRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        postRequest.addRequestParameters({
+            firstName: "Test",
+            lastName: "User",
+            terms: "on",
+            userName: usr,
+            newPassword: pwd,
+            password: pwd,
+            outputFormat: "json"
+        });
+
+        var response = postRequest.execute();
+        validateResponse(response);
+        return response;
+    }
 }

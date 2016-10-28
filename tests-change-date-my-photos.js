@@ -4,6 +4,7 @@ var importFile = function(file) {
 
 eval(importFile(datafile('controller-browser.js')));
 eval(importFile(datafile('controller-api.js')));
+eval(importFile(datafile('controller-user.js')));
 eval(importFile(datafile('Beacons.js')));
 eval(importFile(datafile('page-photos.js')));
 
@@ -14,9 +15,7 @@ beacons.blacklist(client);
 
 var browser = new BrowserController(driver);
 var api = new ApiController(client);
-var csv = test.getCSV("csv.csv");
-var user = csv.get(1).get("user");
-var pass = csv.get(1).get("pass");
+var userController = new UserController(api);
 var photosPage = new PhotosPage(browser);
 
 var fileName = "gag_5.jpg";
@@ -25,11 +24,11 @@ var file = datafile("gag_5.jpg");
 test.beginTransaction();
 test.beginStep("Change date of image in My Photos.");
 
-api.cleanProfile(user, pass);
-api.doSignedUpload(user, pass, "My Albums", "MyAlbum", file);
+var user = userController.new();
+api.doSignedUpload(user.username, user.password, "My Albums", "MyAlbum", file);
 
 photosPage.visit();
-photosPage.login(user, pass);
+photosPage.login(user.username, user.password);
 photosPage.goToAlbums();
 photosPage.changeDate("2000");
 

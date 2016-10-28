@@ -4,6 +4,7 @@ var importFile = function(file) {
 
 eval(importFile(datafile('controller-browser.js')));
 eval(importFile(datafile('controller-api.js')));
+eval(importFile(datafile('controller-user.js')));
 eval(importFile(datafile('Beacons.js')));
 eval(importFile(datafile('page-welcome.js')));
 eval(importFile(datafile('page-login.js')));
@@ -17,9 +18,7 @@ beacons.blacklist(client);
 
 var browser = new BrowserController(driver);
 var api = new ApiController(client);
-var csv = test.getCSV("csv.csv");
-var user = csv.get(0).get("user");
-var pass = csv.get(0).get("pass");
+var userController = new UserController(api);
 var welcomePage = new WelcomePage(browser);
 var loginPage = new LoginPage(browser);
 var homePage = new HomePage(browser);
@@ -30,11 +29,11 @@ var fileName = "07.jpg";
 test.beginTransaction();
 test.beginStep("Personalize Christmas Card Signed");
 
-api.cleanProfile(user, pass);
+var user = userController.new();
 
 welcomePage.visit();
 welcomePage.goToLogin();
-loginPage.login(user, pass);
+loginPage.login(user.username, user.password);
 homePage.goToChristmasCards();
 christmasCardsPage.closePreviewDialog();
 christmasCardsPage.personalizeCard();
