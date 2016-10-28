@@ -1,10 +1,9 @@
 function BrowserController(driver) {
-    
-     eval(datafile('logger.js').readContents() + "");
-     
-    this.action = new Actions(driver);
 
+    eval(datafile('logger.js').readContents() + "");
     var logger = new Logger(BrowserController.name);
+
+    this.action = new Actions(driver);
 
     var isCurrentlyVisible = function(by, element) {
         var elements;
@@ -20,12 +19,17 @@ function BrowserController(driver) {
         } else {
             logger.info("Number of elements: " + elements.size());
             if (!elements.get(0).isDisplayed() || !elements.get(0).isEnabled()) {
-                     return false;
-                 }
+                return false;
+            }
             logger.info("Found: " + by);
             return true;
         }
-    };    
+    };
+
+    this.isElementVisible = function(by) {
+        var result = isCurrentlyVisible(by);
+        return result;
+    }
 
     this.waitForDeepElement = function(by, element, timeOut) {
         if (timeOut == null) {
