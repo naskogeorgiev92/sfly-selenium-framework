@@ -6,7 +6,6 @@ eval(importFile(datafile('controller-browser.js')));
 eval(importFile(datafile('controller-api.js')));
 eval(importFile(datafile('controller-user.js')));
 eval(importFile(datafile('Beacons.js')));
-eval(importFile(datafile('page-welcome.js')));
 eval(importFile(datafile('page-login.js')));
 eval(importFile(datafile('page-home.js')));
 eval(importFile(datafile('page-christmas-cards.js')));
@@ -19,7 +18,6 @@ beacons.blacklist(client);
 var browser = new BrowserController(driver);
 var api = new ApiController(client);
 var userController = new UserController(api);
-var welcomePage = new WelcomePage(browser);
 var loginPage = new LoginPage(browser);
 var homePage = new HomePage(browser);
 var christmasCardsPage = new ChristmasCardsPage(browser);
@@ -31,8 +29,8 @@ test.beginStep("Personalize Christmas Card Signed");
 
 var user = userController.new();
 
-welcomePage.visit();
-welcomePage.goToLogin();
+homePage.visit();
+homePage.goToLogin();
 loginPage.login(user.username, user.password);
 homePage.goToChristmasCards();
 christmasCardsPage.closePreviewDialog();

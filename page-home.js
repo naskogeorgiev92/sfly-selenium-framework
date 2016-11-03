@@ -2,6 +2,11 @@ function HomePage(browser) {
     eval(datafile('logger.js').readContents() + "");
     var logger = new Logger(HomePage.name);
 
+    this.url = "https://www.shutterfly.com/";
+    this.loginLink = By.xpath("//span[@class='signupForm-note']/a");
+    this.closeButton = By.className('modal-close');
+    this.welcomePopup = By.id('IPEinvL');
+
     this.cardsCategory = By.id("catItemLink_1");
     this.printsCategory = By.id("catItemLink_2");
     this.calendarsCategory = By.id("catItemLink_3");
@@ -10,6 +15,24 @@ function HomePage(browser) {
     this.printsLink = By.name("&lid=Sub_PR_Prints");
     this.deskCalendarsLink = By.name("&lid=Sub_Cal_Shop Desk Calendars");
     this.myPhotosLink = By.id("sfly3-my-pictures");
+
+    this.visit = function() {
+        browser.navigateToUrl(this.url);
+        if (browser.isElementVisible(this.welcomePopup)) {
+            logger.info("Welcome Popup is visible. Refreshing the page.");
+            browser.navigateToUrl(this.url);
+        } else {
+            logger.info("Welcome Popup isn't visible. Continuing with the test.");
+        }
+    };
+
+    this.closeWelcomeDialog = function() {
+        browser.clickElement(this.closeButton);
+    };
+
+    this.goToLogin = function() {
+        browser.clickElement(this.loginLink);
+    };
 
     this.goToChristmasCards = function() {
         logger.info("Going to Christmas cards.");
