@@ -1,6 +1,6 @@
-function LoginPage(browser) {
+function SignInPage(browser) {
 	eval(datafile('logger.js').readContents() + "");
-    var logger = new Logger(LoginPage.name);
+    var logger = new Logger(SignInPage.name);
 
     this.usernameField = By.id('userName');
     this.passwordField = By.id('password');
@@ -14,11 +14,13 @@ function LoginPage(browser) {
     };
 
     this.isAt = function() {
-    	logger.info("Checkign if the Login page is visible.");
+    	logger.info("Checking if the Sign in page is visible.");
     	var result = browser.isElementVisible(this.signInButton);
     	if(result) {
+            logger.info("The Sign in page is visible.");
     		return true;
     	} else {
+            logger.info("The Sign in page isn't visible.");
     		return false;
     	}
     };

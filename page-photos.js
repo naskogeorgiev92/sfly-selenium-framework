@@ -74,6 +74,7 @@ function PhotosPage(browser) {
         browser.executeScript("$('.popover .select_wrap.year option[value="+dateChange+"]')[0].setAttribute('selected', 'selected');");
         browser.clickElement(this.setTheDateButton, 5000);
         browser.hover(this.selectedPhoto, 15000);
+        pause(3000);
         browser.clickElement(this.frameView, 5000);
         assertTrue(browser.getElementText(this.dateWrapper, 5000).indexOf(dateChange) > -1);
     };

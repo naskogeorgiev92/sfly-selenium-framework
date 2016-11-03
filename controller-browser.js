@@ -29,7 +29,7 @@ function BrowserController(driver) {
     this.isElementVisible = function(by) {
         var result = isCurrentlyVisible(by);
         return result;
-    }
+    };
 
     this.waitForDeepElement = function(by, element, timeOut) {
         if (timeOut == null) {

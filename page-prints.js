@@ -2,7 +2,7 @@ function PrintsPage(browser) {
     eval(datafile('logger.js').readContents() + "");
     var logger = new Logger(PrintsPage.name);
 
-    this.getStartedButton = By.linkText("Get started");
+    this.getStartedButton = By.xpath("//span[contains(.,'Get started')]");
     this.getPhotosButton = By.className("empty-photos");
     this.signInButton = By.className("signup-signin");
     this.signUpButton = By.className("signup-btn-join");

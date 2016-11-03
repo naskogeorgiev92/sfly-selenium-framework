@@ -43,6 +43,7 @@ function ChristmasCardsPage(browser) {
     this.uploadTimelinePhotoSigned = function () {
         browser.clickElement(this.shutterflyPhotosButton, 10000);
         browser.clickElement(this.timelineButton, 5000);
+        pause(5000);
         browser.clickDeepElement(this.firstPhoto, 5000);
     };
 
