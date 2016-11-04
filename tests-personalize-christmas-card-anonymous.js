@@ -21,13 +21,19 @@ var fileName = "07.jpg";
 test.beginTransaction();
 test.beginStep("Personalize Christmas Card Anonymous");
 
+driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
 homePage.visit();
 homePage.closeWelcomeDialog();
 homePage.goToChristmasCards();
 christmasCardsPage.closePreviewDialog();
-christmasCardsPage.personalizeCard();
-christmasCardsPage.uploadPhotoAnonymous(fileName);
+christmasCardsPage.pressPersonalize();
+christmasCardsPage.pressGetPhotos();
+christmasCardsPage.pressUpload();
+christmasCardsPage.uploadPhoto(fileName);
 christmasCardsPage.pressDoneButton();
+
+assertTrue(christmasCardsPage.isPhotoUploaded());
 
 test.endStep();
 test.endTransaction();

@@ -35,6 +35,7 @@ signInPage.login(user.username, user.password);
 homePage.goToChristmasCards();
 christmasCardsPage.closePreviewDialog();
 christmasCardsPage.personalizeCard();
+//pause(1000000);
 christmasCardsPage.uploadPhotoSigned(fileName);
 christmasCardsPage.pressDoneButton();
 
