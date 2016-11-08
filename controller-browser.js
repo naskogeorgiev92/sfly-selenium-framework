@@ -92,4 +92,11 @@ function BrowserController(driver) {
         //this.waitForElement(by, timeOut);
         return driver.findElement(by).getText();
     };
+
+    this.selectOptionByText = function(by, timeOut, text) {
+        logger.info('Selecting an option by text: ' + text);
+        this.waitForElement(by, timeOut);
+        var selectFromDropDown = new Select(driver.findElement(by));
+        selectFromDropDown.selectByVisibleText(text);
+    };
 }
